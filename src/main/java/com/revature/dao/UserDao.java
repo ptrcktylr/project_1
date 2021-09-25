@@ -91,10 +91,47 @@ public class UserDao implements UserDaoInterface {
         return null;
 	}
 
-	// do this !!!!!!!
 	@Override
 	public List<User> getUsersByRoleId(int role_id) {
-		// TODO Auto-generated method stub
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			// query db
+			String sql = "SELECT * FROM ers_users WHERE user_role_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, role_id);
+			ResultSet rs = ps.executeQuery();
+			
+			// create new list 
+			List<User> userList = new ArrayList<User>();
+			
+			// put all users into list
+			while (rs.next()) {
+				
+				// create new user object
+				User user = new User (
+						rs.getInt("ers_user_id"),
+						rs.getString("ers_username"),
+						rs.getString("ers_password"),
+						rs.getString("user_first_name"),
+						rs.getString("user_last_name"),
+						rs.getString("user_email"),
+						rs.getInt("user_role_id")
+						);
+				
+				// add object to list
+				userList.add(user);
+				
+			}
+			
+			return userList;
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Failed to get all users");
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	

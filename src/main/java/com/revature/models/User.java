@@ -145,9 +145,11 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", first_name=" + first_name
+				+ ", last_name=" + last_name + ", email=" + email + ", role_id=" + role_id + "]";
+	}
 	
 }

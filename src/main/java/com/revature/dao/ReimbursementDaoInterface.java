@@ -10,7 +10,7 @@ public interface ReimbursementDaoInterface {
 	public List<Reimbursement> getAllReimbursements();
 	
 	// add new reimbursement, return its id when created
-	public int addReimbursement(Reimbursement reimbursement);
+	public void addReimbursement(Reimbursement reimbursement, int user_id);
 	
 	// remove a reimbursement (with its id)
 	public void removeReimbursement(int reimbursement_id);
@@ -22,9 +22,9 @@ public interface ReimbursementDaoInterface {
 	public List<Reimbursement> getAllReimbursementsByStatus(int status_id);
 	
 	// approve reimbursement (with its id), return it as a Reimbursement
-	public Reimbursement approveReimbursement(int reimbursement_id);
+	public void approveReimbursement(int reimbursement_id);
 	
 	// deny reimbursement (with its id), return it as a Reimbursement
-	public Reimbursement denyReimbursement(int reimbursement_id);
+	public void denyReimbursement(int reimbursement_id);
 	
 }

@@ -1,16 +1,17 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class Reimbursement {
 	private int id;
 	private double amount;
-	private String submitted_at; // timestamp
-	private String resolved_at; // timestamp
+	private Timestamp submitted_at;
+	private Timestamp resolved_at; 
 	private String description;
 	private byte[] receipt; // image represented as byte array (bytea in db)
-	private int author_id; // user foreign key
-	private int resolver_id; // user foreign key
+	private User author; // user foreign key
+	private User resolver; // user foreign key
 	private int status_id; // status foreign key
 	private int type_id; // type foreign key
 	
@@ -18,9 +19,9 @@ public class Reimbursement {
 	public Reimbursement() {
 		
 	}
-	
-	public Reimbursement(int id, double amount, String submitted_at, String resolved_at, String description,
-			byte[] receipt, int author_id, int resolver_id, int status_id, int type_id) {
+
+	public Reimbursement(int id, double amount, Timestamp submitted_at, Timestamp resolved_at, String description,
+			byte[] receipt, User author, User resolver, int status_id, int type_id) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -28,24 +29,36 @@ public class Reimbursement {
 		this.resolved_at = resolved_at;
 		this.description = description;
 		this.receipt = receipt;
-		this.author_id = author_id;
-		this.resolver_id = resolver_id;
+		this.author = author;
+		this.resolver = resolver;
 		this.status_id = status_id;
 		this.type_id = type_id;
 	}
 
 	// possibly constructor used to create new reimb. from site
-	public Reimbursement(double amount, String description, int author_id, int type_id) {
+	public Reimbursement(double amount, String description, User author, int type_id) {
 		super();
 		this.amount = amount;
 		this.description = description;
-		this.author_id = author_id;
+		this.author = author;
 		this.type_id = type_id;
 		
 		// set the status to pending since it was just created
 		this.status_id = 1;
 	}
-	
+
+	public Reimbursement(int id, double amount, Timestamp submitted_at, Timestamp resolved_at, String description,
+			byte[] receipt, int status_id, int type_id) {
+		super();
+		this.id = id;
+		this.amount = amount;
+		this.submitted_at = submitted_at;
+		this.resolved_at = resolved_at;
+		this.description = description;
+		this.receipt = receipt;
+		this.status_id = status_id;
+		this.type_id = type_id;
+	}
 
 	public int getId() {
 		return id;
@@ -67,22 +80,22 @@ public class Reimbursement {
 	}
 
 
-	public String getSubmitted_at() {
+	public Timestamp getSubmitted_at() {
 		return submitted_at;
 	}
 
 
-	public void setSubmitted_at(String submitted_at) {
+	public void setSubmitted_at(Timestamp submitted_at) {
 		this.submitted_at = submitted_at;
 	}
 
 
-	public String getResolved_at() {
+	public Timestamp getResolved_at() {
 		return resolved_at;
 	}
 
 
-	public void setResolved_at(String resolved_at) {
+	public void setResolved_at(Timestamp resolved_at) {
 		this.resolved_at = resolved_at;
 	}
 
@@ -107,23 +120,23 @@ public class Reimbursement {
 	}
 
 
-	public int getAuthor_id() {
-		return author_id;
+	public User getAuthor() {
+		return author;
 	}
 
 
-	public void setAuthor_id(int author_id) {
-		this.author_id = author_id;
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 
-	public int getResolver_id() {
-		return resolver_id;
+	public User getResolver() {
+		return resolver;
 	}
 
 
-	public void setResolver_id(int resolver_id) {
-		this.resolver_id = resolver_id;
+	public void setResolver(User resolver) {
+		this.resolver = resolver;
 	}
 
 
@@ -145,6 +158,14 @@ public class Reimbursement {
 	public void setType_id(int type_id) {
 		this.type_id = type_id;
 	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", amount=" + amount + ", submitted_at=" + submitted_at + ", resolved_at="
+				+ resolved_at + ", description=" + description + ", receipt=" + Arrays.toString(receipt) + ", author="
+				+ author + ", resolver=" + resolver + ", status_id=" + status_id + ", type_id=" + type_id + "]";
+	}
+	
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,9 +58,40 @@ public class UserDao implements UserDaoInterface {
 
 	@Override
 	public User getUserById(int user_id) {
-		return null;
+        try(Connection conn = ConnectionUtil.getConnection()){
+            
+            ResultSet rs = null;
+            
+            String sql = "select * from ers_users where ers_user_id = ?";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setInt(1, user_id);
+            
+            rs = ps.executeQuery();
+            
+            User user_reim = null;
+            rs.next();
+            user_reim = new User(
+                    rs.getInt("ers_user_id"),
+                    rs.getString("ers_username"),
+                    rs.getString("ers_password").toString(),
+                    rs.getString("user_first_name").toString(),
+                    rs.getString("user_last_name"),
+                    rs.getString("user_email"),
+                    rs.getInt("user_role_id"));
+            
+            return user_reim;
+            
+            
+        } catch(SQLException e) {
+            System.out.println("Something went wrong with your checkusername database");
+            e.printStackTrace();
+        }
+        return null;
 	}
 
+	// do this !!!!!!!
 	@Override
 	public List<User> getUsersByRoleId(int role_id) {
 		// TODO Auto-generated method stub

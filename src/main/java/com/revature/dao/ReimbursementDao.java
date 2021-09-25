@@ -2,8 +2,11 @@ package com.revature.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +17,44 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 
 	@Override
 	public List<Reimbursement> getAllReimbursements() {
-		// TODO Auto-generated method stub
+		
+		UserDao UDao = new UserDao();
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "SELECT * FROM ers_reimbursement";
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			List<Reimbursement> reimbursementList = new ArrayList<Reimbursement>();
+			
+			while (rs.next()) {
+				Reimbursement reimbursement = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getDouble("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id")
+						);
+				reimbursement.setAuthor(UDao.getUserById(rs.getInt("reimb_author")));
+				
+				if (rs.getInt("reimb_resolver") != 0) {
+					reimbursement.setResolver(UDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				
+				reimbursementList.add(reimbursement);
+			}
+			
+			return reimbursementList;
+			
+		} catch (SQLException e) {
+			System.out.println("Failed to get all reimbursements");
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
@@ -54,8 +94,20 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 
 	@Override
 	public void removeReimbursement(int reimbursement_id) {
-		// TODO Auto-generated method stub
-		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			
+			String sql = "DELETE FROM ers_reimbursement WHERE reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, reimbursement_id);
+			ps.executeUpdate();
+			
+			System.out.println("Reimbursement with ID " + reimbursement_id + " deleted successfuly!");
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Failed to delete reimbursement!");
+			e.printStackTrace();
+		}
 	}
 
 	@Override

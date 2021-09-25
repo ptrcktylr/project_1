@@ -62,6 +62,15 @@ public class Reimbursement {
 		this.type_id = type_id;
 	}
 
+	public Reimbursement(double amount, String description, User author, int status_id, int type_id) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.author = author;
+		this.status_id = status_id;
+		this.type_id = type_id;
+	}
+
 	public int getId() {
 		return id;
 	}

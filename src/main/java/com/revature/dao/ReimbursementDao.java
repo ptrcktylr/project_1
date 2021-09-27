@@ -112,24 +112,152 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 
 	@Override
 	public List<Reimbursement> getAllReimbursementsByUser(int user_id) {
-		// TODO Auto-generated method stub
+		UserDao uDao = new UserDao();
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			ResultSet rs = null;
+			
+			String sql = "select * from ers_reimbursement where reimb_author = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, user_id);
+			
+			rs = ps.executeQuery();
+			
+			List<Reimbursement> reimburse_list = new ArrayList<>();
+			
+			Reimbursement reimburst = null;
+			
+			while(rs.next()) {
+				
+				reimburst = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getInt("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						null,
+						null,
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"));
+				
+				System.out.println(rs.getInt("reimb_resolver"));
+				
+				if(rs.getInt("reimb_resolver") != 0){
+					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				reimburst.setAuthor(uDao.getUserById(rs.getInt("reimb_author")));
+
+				reimburse_list.add(reimburst);
+			}
+			
+			return reimburse_list;
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Something went wrong with your checkusername database");
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public List<Reimbursement> getAllReimbursementsByStatus(int status_id) {
-		// TODO Auto-generated method stub
+		UserDao uDao = new UserDao();
+
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			ResultSet rs = null;
+
+			String sql = "select * from ers_reimbursement where reimb_status_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, status_id);
+
+			rs = ps.executeQuery();
+
+			List<Reimbursement> reimburse_list = new ArrayList<>();
+
+			Reimbursement reimburst = null;
+
+			while(rs.next()) {
+
+				reimburst = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getInt("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						null,
+						null,
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"));
+
+				System.out.println(rs.getInt("reimb_resolver"));
+
+				if(rs.getInt("reimb_resolver") != 0){
+					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				reimburst.setAuthor(uDao.getUserById(rs.getInt("reimb_author")));
+
+
+
+				reimburse_list.add(reimburst);
+			}
+
+			return reimburse_list;
+
+
+		} catch(SQLException e) {
+			System.out.println("Failed to get all reimbursements by status id!");
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public void approveReimbursement(int reimbursement_id) {
-		// TODO Auto-generated method stub
+		// TODO: possibly return reimbursement object
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			String sql = "UPDATE ers_reimbursement SET reimb_status_id = 2 WHERE reimb_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, reimbursement_id);
+
+			ps.executeUpdate();
+
+
+		} catch(SQLException e) {
+			System.out.println("Something went wrong with your checkusername database");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void denyReimbursement(int reimbursement_id) {
-		// TODO Auto-generated method stub
+		// TODO: possibly return reimbursement object
+				try(Connection conn = ConnectionUtil.getConnection()){
+
+					String sql = "UPDATE ers_reimbursement SET reimb_status_id = 3 WHERE reimb_id = ?";
+
+					PreparedStatement ps = conn.prepareStatement(sql);
+
+					ps.setInt(1, reimbursement_id);
+
+					ps.executeUpdate();
+
+
+				} catch(SQLException e) {
+					System.out.println("Something went wrong with your checkusername database");
+					e.printStackTrace();
+				}
 	}
 
 }

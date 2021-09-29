@@ -33,9 +33,11 @@ public class Driver {
 					config.enableCorsForAllOrigins(); //allows server to process JS requests from anywhere
 				}
 				).start(8090);
-
+		
+		// persist session attributes between requests
+		app.before(ctx -> ctx.header("Access-Control-Allow-Credentials", "true"));
+		
 		//We use javalin to expose API endpoints, which HTTP Requests
-
 		app.post(("/login"), lc.loginHandler);
 
 		app.get(("/logout"), lc.logoutHandler);

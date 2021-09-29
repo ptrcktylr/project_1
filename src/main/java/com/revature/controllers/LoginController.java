@@ -37,20 +37,20 @@ public class LoginController {
 
 		if(user != null) {
 			//generate a JSON Web Token to uniquely identify the user
+			@SuppressWarnings("unused")
 			String jwt = JwtUtil.generate(LDTO.getUsername(), LDTO.getPassword());
 
 			//create a user session
-			sessionUser = ctx.req.getSession(); //req is the "Request" Object, we establish sessions through it
+			sessionUser = ctx.req.getSession();
 			sessionUser.setAttribute("user", user);
 
-
-			//ctx.req.login(LDTO.getUsername(), LDTO.getPassword());
 			//successful status code
 			ctx.status(200);
 
-
 			//String JSONUser = gson.toJson(user);
 			//ctx.result(JSONUser);
+			
+			System.out.println(sessionUser.getAttribute("user"));
 
 		} else {
 			ctx.status(401); //unauthorized status code

@@ -47,8 +47,8 @@ public class LoginController {
 			//successful status code
 			ctx.status(200);
 
-			//String JSONUser = gson.toJson(user);
-			//ctx.result(JSONUser);
+			String JSONUser = gson.toJson(user);
+			ctx.result(JSONUser);
 			
 			System.out.println(sessionUser.getAttribute("user"));
 

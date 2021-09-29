@@ -134,5 +134,44 @@ public class UserDao implements UserDaoInterface {
 		
 		return null;
 	}
+
+	@Override
+	public User validLoginByRole(String username, String password, int user_role_id) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			// query db
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? and ers_password = ? and user_role_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setInt(3, user_role_id);
+			ResultSet rs = ps.executeQuery();
+
+			// put all users into list
+			if(rs.next()) {
+
+				User user = new User(
+						rs.getInt("ers_user_id"),
+						rs.getString("ers_username"),
+						rs.getString("ers_password"),
+						rs.getString("user_first_name"),
+						rs.getString("user_last_name"),
+						rs.getString("user_email"),
+						rs.getInt("user_role_id")
+						);
+
+				return user;
+			}
+
+			return null;
+
+
+		} catch (SQLException e) {
+			System.out.println("Failed to get all users");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 	
 }

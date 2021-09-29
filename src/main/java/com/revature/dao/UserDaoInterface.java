@@ -15,4 +15,7 @@ public interface UserDaoInterface {
 	// get users by role id
 	public List<User> getUsersByRoleId(int role_id);
 	
+	// validate user, return user object
+	public User validLoginByRole(String username, String password, int user_role_id);
+	
 }

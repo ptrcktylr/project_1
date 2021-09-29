@@ -12,6 +12,10 @@ public class EmployeeService {
 	public List<Reimbursement> getPastReim(int id){
 		return rD.getAllReimbursementsByUser(id);
 	}
+	
+	public List<Reimbursement> getPendingReims(int id){
+		return rD.getAllPendingReimbursementsByUser(id);
+	}
 
 	public void addReim(Reimbursement reimbursement, int user_id) {
 		rD.addReimbursement(reimbursement, user_id);

@@ -46,6 +46,13 @@ public class Driver {
 
 		app.get("/myTickets", ec.viewEmployeeReimHandler);
 		
+		// get my pending tickets
+		app.get("/myPendingTickets", ec.viewPendingEmployeeReimHandler);
+		
+		// get all pending tickets
+		
+		// get all tickets
+		
 	}
 
 }

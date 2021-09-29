@@ -21,6 +21,9 @@ public interface ReimbursementDaoInterface {
 	// get all reimbursements by status id (open, closed)
 	public List<Reimbursement> getAllReimbursementsByStatus(int status_id);
 	
+	// get all PENDING reimbursements from specific user (with user id)
+	public List<Reimbursement> getAllPendingReimbursementsByUser(int user_id);
+	
 	// approve reimbursement (with its id), return it as a Reimbursement
 	public void approveReimbursement(int reimbursement_id);
 	

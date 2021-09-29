@@ -53,5 +53,26 @@ public class EmployeeController {
 		}
 
 	};
+	
+	public Handler viewPendingEmployeeReimHandler = (ctx) -> {
+		
+		if(ctx.req.getSession(false) != null) {
+
+			EmployeeService es = new EmployeeService();
+			User user = (User) LoginController.sessionUser.getAttribute("user");
+
+			List<Reimbursement> allUsers = es.getPendingReims(user.getId());
+
+			Gson gson = new Gson();
+
+			String JSONUser = gson.toJson(allUsers);
+
+			ctx.result(JSONUser);
+			ctx.status(200);
+
+		} else {
+			ctx.status(403);
+		}
+	};
 
 }

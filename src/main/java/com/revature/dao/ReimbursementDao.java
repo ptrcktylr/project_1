@@ -221,6 +221,62 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 	}
 
 	@Override
+	public List<Reimbursement> getAllPendingReimbursementsByUser(int user_id) {
+		
+		UserDao uDao = new UserDao();
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			ResultSet rs = null;
+			
+			String sql = "select * from ers_reimbursement where reimb_author = ? and reimb_status_id = 1";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, user_id);
+			
+			rs = ps.executeQuery();
+			
+			List<Reimbursement> reimburse_list = new ArrayList<>();
+			
+			Reimbursement reimburst = null;
+			
+			while(rs.next()) {
+				
+				reimburst = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getDouble("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						null,
+						null,
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"));
+				
+				// System.out.println(rs.getInt("reimb_resolver"));
+				
+				if(rs.getInt("reimb_resolver") != 0){
+					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				reimburst.setAuthor(uDao.getUserById(rs.getInt("reimb_author")));
+
+				reimburse_list.add(reimburst);
+			}
+			
+			return reimburse_list;
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Something went wrong with your checkusername database");
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	@Override
 	public void approveReimbursement(int reimbursement_id) {
 		// TODO: possibly return reimbursement object
 		try(Connection conn = ConnectionUtil.getConnection()){
@@ -259,5 +315,8 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 					e.printStackTrace();
 				}
 	}
+
+	
+	
 
 }

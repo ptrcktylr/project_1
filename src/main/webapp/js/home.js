@@ -2,6 +2,9 @@ const url = "http://localhost:8090/";
 
 // Employee Buttons
 let newReimButton = document.getElementById("newReimbursement");
+newReimButton.addEventListener("click", function () {
+    window.location = "../html/new_reimbursement.html"
+});
 
 let myPendingReims = document.getElementById("myPendingReimbursements");
 myPendingReims.addEventListener("click", function () {

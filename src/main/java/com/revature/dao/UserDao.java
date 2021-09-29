@@ -136,15 +136,14 @@ public class UserDao implements UserDaoInterface {
 	}
 
 	@Override
-	public User validLoginByRole(String username, String password, int user_role_id) {
+	public User validLoginByRole(String username, String password) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
 			// query db
-			String sql = "SELECT * FROM ers_users WHERE ers_username = ? and ers_password = ? and user_role_id = ?";
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? and ers_password = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ps.setString(2, password);
-			ps.setInt(3, user_role_id);
 			ResultSet rs = ps.executeQuery();
 
 			// put all users into list

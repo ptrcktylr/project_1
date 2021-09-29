@@ -5,9 +5,9 @@ import com.revature.models.User;
 
 public class LoginService {
 
-	public User userLogin(String username, String password, int user_role_id) {
+	public User userLogin(String username, String password) {
 		UserDao uD = new UserDao();
-		return uD.validLoginByRole(username, password, user_role_id);
+		return uD.validLoginByRole(username, password);
 	}
 
 }

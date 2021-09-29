@@ -12,11 +12,10 @@ public class LoginDTO {
 	//our LoginDTO models only the username/password of our users
 	private String username;
 	private String password;
-	private int user_role_id;
 
 	@Override
 	public String toString() {
-		return "LoginDTO [username=" + username + ", password=" + password + ", user_role_id=" + user_role_id + "]";
+		return "LoginDTO [username=" + username + ", password=" + password + "]";
 	}
 
 	//Then I just want two constructors so we can instantiate this class when needed
@@ -24,19 +23,9 @@ public class LoginDTO {
 		super();
 	}
 
-	public LoginDTO(String username, String password, int user_role_id) {
+	public LoginDTO(String username, String password) {
 		super();
 		this.username = username;
-		this.password = password;
-		this.user_role_id = user_role_id;
-	}
-
-	public int getUser_role_id() {
-		return user_role_id;
-	}
-
-	public void setUser_role_id(int user_role_id) {
-		this.user_role_id = user_role_id;
 	}
 
 	public String getUsername() {

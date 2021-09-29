@@ -33,7 +33,7 @@ public class LoginController {
 			return;
 		}
 
-		User user =  ls.userLogin(LDTO.getUsername(), LDTO.getPassword(), LDTO.getUser_role_id());
+		User user =  ls.userLogin(LDTO.getUsername(), LDTO.getPassword());
 
 		if(user != null) {
 			//generate a JSON Web Token to uniquely identify the user

@@ -134,7 +134,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 				
 				reimburst = new Reimbursement(
 						rs.getInt("reimb_id"),
-						rs.getInt("reimb_amount"),
+						rs.getDouble("reimb_amount"),
 						rs.getTimestamp("reimb_submitted"),
 						rs.getTimestamp("reimb_resolved"),
 						rs.getString("reimb_description"),
@@ -144,7 +144,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 						rs.getInt("reimb_status_id"),
 						rs.getInt("reimb_type_id"));
 				
-				System.out.println(rs.getInt("reimb_resolver"));
+				// System.out.println(rs.getInt("reimb_resolver"));
 				
 				if(rs.getInt("reimb_resolver") != 0){
 					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
@@ -188,7 +188,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 
 				reimburst = new Reimbursement(
 						rs.getInt("reimb_id"),
-						rs.getInt("reimb_amount"),
+						rs.getDouble("reimb_amount"),
 						rs.getTimestamp("reimb_submitted"),
 						rs.getTimestamp("reimb_resolved"),
 						rs.getString("reimb_description"),

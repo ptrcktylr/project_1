@@ -15,8 +15,7 @@ async function loginFunc() {
 
     let user = {
         "username":username,
-        "password":password,
-        "user_role_id":2 // change this..
+        "password":password
     }
 
     console.log(user);
@@ -34,7 +33,7 @@ async function loginFunc() {
     if (response.status === 200) {
         document.getElementById("login-form").innerText = "Welcome!";
         document.cookie = `username=${user.username}; SameSite=None; Secure`
-        document.cookie = `user_role_id=${user.user_role_id}; SameSite=None; Secure`
+        window.location = "../html/index.html"
     } else {
         document.getElementById("login-form").innerText = "Login failed!";
     }

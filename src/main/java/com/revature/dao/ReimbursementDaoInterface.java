@@ -25,9 +25,9 @@ public interface ReimbursementDaoInterface {
 	public List<Reimbursement> getAllPendingReimbursementsByUser(int user_id);
 	
 	// approve reimbursement (with its id), return it as a Reimbursement
-	public void approveReimbursement(int reimbursement_id);
+	public void approveReimbursement(int reimbursement_id, int resolver);
 	
 	// deny reimbursement (with its id), return it as a Reimbursement
-	public void denyReimbursement(int reimbursement_id);
+	public void denyReimbursement(int reimbursement_id, int resolver);
 	
 }

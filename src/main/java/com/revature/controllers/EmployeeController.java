@@ -13,7 +13,10 @@ public class EmployeeController {
 
 	public Handler addReimbursementHandler = (ctx) -> {
 
-		if(ctx.req.getSession(false) != null) {
+		User user = (User) LoginController.sessionUser.getAttribute("user");
+		
+		// check user logged in and user is an employee
+		if (ctx.req.getSession(false) != null && user.getRole_id() == 1) {
 
 			EmployeeService es = new EmployeeService();
 
@@ -22,22 +25,29 @@ public class EmployeeController {
 			Gson gson = new Gson();
 
 			Reimbursement reimbursement = gson.fromJson(body, Reimbursement.class);
+				
+			if(reimbursement.getAmount() == 0 || reimbursement.getType_id() == 0) {
+				ctx.result("Amount and Type fields must be filled");
+				ctx.status(400);
+				return;
+			}else {
+				reimbursement.setStatus_id(1);
+				es.addReim(reimbursement, user.getId());
+			}
 
-			User user = (User) LoginController.sessionUser.getAttribute("user");
-
-			es.addReim(reimbursement, user.getId());
 		} else {
+			ctx.result("Employee Permission only");
 			ctx.status(403);
 		}
-
 	};
 
 	public Handler viewEmployeeReimHandler = (ctx) -> {
+		
+		User user = (User) LoginController.sessionUser.getAttribute("user");
 
-		if(ctx.req.getSession(false) != null) {
+		if(ctx.req.getSession(false) != null && user.getRole_id() == 1) {
 
 			EmployeeService es = new EmployeeService();
-			User user = (User) LoginController.sessionUser.getAttribute("user");
 
 			List<Reimbursement> allUsers = es.getPastReim(user.getId());
 
@@ -49,6 +59,7 @@ public class EmployeeController {
 			ctx.status(200);
 
 		} else {
+			ctx.result("Employee Permission only");
 			ctx.status(403);
 		}
 
@@ -56,10 +67,11 @@ public class EmployeeController {
 	
 	public Handler viewPendingEmployeeReimHandler = (ctx) -> {
 		
-		if(ctx.req.getSession(false) != null) {
+		User user = (User) LoginController.sessionUser.getAttribute("user");
+		
+		if(ctx.req.getSession(false) != null && user.getRole_id() == 1) {
 
 			EmployeeService es = new EmployeeService();
-			User user = (User) LoginController.sessionUser.getAttribute("user");
 
 			List<Reimbursement> allUsers = es.getPendingReims(user.getId());
 
@@ -71,6 +83,7 @@ public class EmployeeController {
 			ctx.status(200);
 
 		} else {
+			ctx.result("Employee Permission only");
 			ctx.status(403);
 		}
 	};

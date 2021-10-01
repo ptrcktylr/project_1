@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.revature.controllers.EmployeeController;
 import com.revature.controllers.LoginController;
+import com.revature.controllers.ManagerController;
 import com.revature.dao.ReimbursementDao;
 import com.revature.dao.UserDao;
 import com.revature.utils.ConnectionUtil;
@@ -18,6 +19,7 @@ public class Driver {
 		UserDao uD = new UserDao();
 		EmployeeController ec = new EmployeeController();
 		LoginController lc = new LoginController();
+		ManagerController mc = new ManagerController();
 
 		try(Connection conn = ConnectionUtil.getConnection()){
 			System.out.println("We have connected to the Database");
@@ -25,8 +27,6 @@ public class Driver {
 			System.out.println("FAILED CONNECTION");
 			e.printStackTrace();
 		}
-
-		//System.out.println(uD.validLoginByRole("test_manager", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", 2));
 
 		Javalin app = Javalin.create(
 				config -> {
@@ -37,21 +37,19 @@ public class Driver {
 		// persist session attributes between requests
 		app.before(ctx -> ctx.header("Access-Control-Allow-Credentials", "true"));
 		
-		//We use javalin to expose API endpoints, which HTTP Requests
 		app.post(("/login"), lc.loginHandler);
-
-		app.get(("/logout"), lc.logoutHandler);
+		app.post(("/logout"), lc.logoutHandler);
 
 		app.post("/createTicket", ec.addReimbursementHandler);
-
 		app.get("/myTickets", ec.viewEmployeeReimHandler);
+		app.get("/myPending", ec.viewPendingEmployeeReimHandler);
 		
-		// get my pending tickets
-		app.get("/myPendingTickets", ec.viewPendingEmployeeReimHandler);
 		
-		// get all pending tickets
-		
-		// get all tickets
+		//Manager Controller
+		app.get("/allTickets", mc.viewAllReimHandler);
+		app.get("/pendingTickets", mc.viewPendingReimHandler);
+		app.patch("/approveTicket/:r_id", mc.approveReimbursementHandler);
+		app.patch("/denyTicket/:r_id", mc.denyReimbursementHandler);
 		
 	}
 

@@ -12,9 +12,14 @@ import io.javalin.http.Handler;
 
 public class LoginController {
 
-	static HttpSession sessionUser = null;
+	public static HttpSession sessionUser = null;
 
 	public Handler loginHandler = (ctx) -> {
+		
+		if (ctx.req.getSession(false) != null) {
+			ctx.result("You are already logged in!");
+			return;
+		}
 
 		LoginService ls = new LoginService();
 		String body = ctx.body();

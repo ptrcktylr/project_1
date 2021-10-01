@@ -255,8 +255,6 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 						rs.getInt("reimb_status_id"),
 						rs.getInt("reimb_type_id"));
 				
-				// System.out.println(rs.getInt("reimb_resolver"));
-				
 				if(rs.getInt("reimb_resolver") != 0){
 					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
 				}
@@ -277,41 +275,51 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 	}
 	
 	@Override
-	public void approveReimbursement(int reimbursement_id) {
-		// TODO: possibly return reimbursement object
+	public void approveReimbursement(int reimbursement_id, int resolver) {
 		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			// get current datetime
+			Date date = new Date();
+			Timestamp currentTimestamp = new Timestamp(date.getTime());
 
-			String sql = "UPDATE ers_reimbursement SET reimb_status_id = 2 WHERE reimb_id = ?";
+			String sql = "UPDATE ers_reimbursement SET reimb_status_id = 2, reimb_resolver = ?, reimb_resolved = ? WHERE reimb_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
-
-			ps.setInt(1, reimbursement_id);
+			
+			ps.setInt(1, resolver);
+			ps.setTimestamp(2, currentTimestamp);
+			ps.setInt(3, reimbursement_id);
 
 			ps.executeUpdate();
 
 
 		} catch(SQLException e) {
-			System.out.println("Something went wrong with your checkusername database");
+			System.out.println("Couldn't approve reimbursement!");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void denyReimbursement(int reimbursement_id) {
-		// TODO: possibly return reimbursement object
+	public void denyReimbursement(int reimbursement_id, int resolver) {
 				try(Connection conn = ConnectionUtil.getConnection()){
+					
+					// get current datetime
+					Date date = new Date();
+					Timestamp currentTimestamp = new Timestamp(date.getTime());
 
-					String sql = "UPDATE ers_reimbursement SET reimb_status_id = 3 WHERE reimb_id = ?";
+					String sql = "UPDATE ers_reimbursement SET reimb_status_id = 3, reimb_resolver = ?, reimb_resolved = ? WHERE reimb_id = ?";
 
 					PreparedStatement ps = conn.prepareStatement(sql);
 
-					ps.setInt(1, reimbursement_id);
+					ps.setInt(1, resolver);
+					ps.setTimestamp(2, currentTimestamp);
+					ps.setInt(3, reimbursement_id);
 
 					ps.executeUpdate();
 
 
 				} catch(SQLException e) {
-					System.out.println("Something went wrong with your checkusername database");
+					System.out.println("Couldn't deny reimbursement!");
 					e.printStackTrace();
 				}
 	}

@@ -18,5 +18,11 @@ myReims.addEventListener("click", function () {
 
 // Manager Buttons
 let allPendingReims = document.getElementById("allPendingReimbursements");
+allPendingReims.addEventListener("click", function () {
+    window.location = "../html/pending_reimbursements.html"
+});
 
 let allReims = document.getElementById("allReimbursements");
+allReims.addEventListener("click", function () {
+    window.location = "../html/reimbursements.html"
+});

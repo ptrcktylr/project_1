@@ -3,7 +3,7 @@ const url = "http://localhost:8090/";
 const tableBody = document.getElementById("reimb-table-body");
 
 async function getMyReims() {
-    let response = await fetch(url + "allTickets", {credentials: "include"});
+    let response = await fetch(url + "pendingTickets", {credentials: "include"});
 
     // clear table
     tableBody.innerHTML = "";
@@ -30,9 +30,7 @@ async function getMyReims() {
                 <td>${types[ticket.type_id]}</td>
                 <td>${statuses[ticket.status_id]}</td>
                 <td>${ticket.author.first_name + " " + ticket.author.last_name}</td>
-                <td>${ticket.resolver.first_name + " " + ticket.resolver.last_name}</td>
                 <td>${ticket.submitted_at}</td>
-                <td>${ticket.resolved_at}</td>
             `;
             } else {
                 tableBody.innerHTML += `
@@ -41,9 +39,7 @@ async function getMyReims() {
                 <td>${types[ticket.type_id]}</td>
                 <td>${statuses[ticket.status_id]}</td>
                 <td>${ticket.author.first_name + " " + ticket.author.last_name}</td>
-                <td></td>
                 <td>${ticket.submitted_at}</td>
-                <td></td>
                 `;
             }
 

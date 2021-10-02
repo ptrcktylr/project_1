@@ -8,12 +8,13 @@ logoutButton.addEventListener("click", logout);
 var amount = document.getElementById("amount");
 var description = document.getElementById("description");
 var type = document.getElementById("type");
+var receipt = document.getElementById("receipt");
+var receipt_value = null;
 
+// Result notification
 var result = document.getElementById("result");
 
 // Get values
-
-
 const submitButton = document.getElementById("newReimbButton");
 submitButton.addEventListener("click", submitTicket);
 
@@ -25,12 +26,21 @@ async function submitTicket() {
     var amount_value = amount.value;
     var description_value = description.value;
     var type_value = type.value;
+    
+    console.log(receipt_value);
 
     let newTicket = {
         "amount":parseFloat(amount_value),
         "type_id":parseInt(type_value),
-        "description":description_value
+        "description":description_value,
     }
+
+    // if there's an image, add it to the body
+    if (receipt_value) {
+        newTicket["receipt"] = Array.from(receipt_value);
+    }
+
+    console.log(newTicket);
 
     let response = await fetch(url + "createTicket", {
         method: "POST",
@@ -84,4 +94,40 @@ function goHome() {
 function resetForm() {
     amount.value = "";
     description.value = "";
+    receipt.value = "";
+
+    receipt_value = null;
+
+}
+
+// Get receipt image
+function getReceipt() {
+    const file = receipt.files[0];
+    const reader = new FileReader();
+  
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+      receipt_value = convertBase64ToArrayBuffer(extractBase64(reader.result));
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+}
+
+function extractBase64(dataUrl) {
+    let parts = dataUrl.split(";base64,");
+    parts[0].replace("data:", "");
+    let base64 = parts[1];
+    return base64;
+}
+
+function convertBase64ToArrayBuffer(base64) {
+    const btyeChars = atob(base64);
+    const byteNums = new Array(btyeChars.length);
+    for (let i = 0; i < btyeChars.length; i++) {
+        byteNums[i] = btyeChars.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNums);
+    return byteArray;
 }

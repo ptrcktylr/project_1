@@ -68,8 +68,8 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 			Timestamp currentTimestamp = new Timestamp(date.getTime());
 			
 			String sql = "INSERT INTO ers_reimbursement "
-					+ "(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) "
-					+ "VALUES (?, ?, ?, ?, ?, ?)";
+					+ "(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id, reimb_receipt) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = conn.prepareCall(sql);
 			
@@ -79,6 +79,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 			ps.setInt(4, user_id);
 			ps.setInt(5, reimbursement.getStatus_id());
 			ps.setInt(6, reimbursement.getType_id());
+			ps.setBytes(7, reimbursement.getReceipt());
 			
 			ps.executeUpdate();
 			

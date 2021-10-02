@@ -108,6 +108,10 @@ function displayTicket(ticket_data) {
     ticket_body.hidden = false;
 
     let ticket_desc = (ticket_data.description || " ");
+    var ticket_img = null;
+    if (ticket_data.receipt) {
+        ticket_img = `src="data:image/png;base64,` + bytesToBase64(ticket_data.receipt) + `"`;
+    }
     
     if (ticket_data.status_id != 1) {
 
@@ -126,6 +130,7 @@ function displayTicket(ticket_data) {
                                 <div><strong>Resolved By: </strong> ${ticket_data.resolver.first_name + " " + ticket_data.resolver.last_name}</div>
                                 <div><strong>Submitted At: </strong> ${ticket_data.submitted_at}</div>
                                 <div><strong>Resolved At: </strong> ${ticket_data.resolved_at}</div>
+                                <div><img class="mt-3" id="ticketImg" ${ticket_img}"></div>
                             </div>
                         </div>
                         <button class="btn btn-danger" onclick="back()">Close</button>
@@ -151,6 +156,7 @@ function displayTicket(ticket_data) {
                                 <div><strong>Resolved By: </strong> </div>
                                 <div><strong>Submitted At: </strong> ${ticket_data.submitted_at}</div>
                                 <div><strong>Resolved At: </strong> </div>
+                                <div><img class="mt-3" id="ticketImg" ${ticket_img}"></div>
                             </div>
                         </div>
                         <button class="btn btn-danger" onclick="back()">Close</button>
@@ -166,4 +172,13 @@ function displayTicket(ticket_data) {
 function back() {
     ticketsContainer.hidden = false;
     ticket_body.hidden = true;
+}
+
+function bytesToBase64(byteA) {
+    let base64 = "";
+    const bytes = new Uint8Array(byteA);
+    for (let i = 0; i < bytes.byteLength; i++) {
+        base64 += String.fromCharCode(bytes[i]);
+    }
+    return btoa(base64);
 }

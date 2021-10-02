@@ -323,8 +323,107 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 					e.printStackTrace();
 				}
 	}
+	
 
+	@Override
+	public Reimbursement getReimbursementById(int reimbursement_id) {
+		
+		UserDao uDao = new UserDao();
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			ResultSet rs = null;
+			
+			String sql = "select * from ers_reimbursement where reimb_id = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, reimbursement_id);
+			
+			rs = ps.executeQuery();
+			
+			Reimbursement reimbursement = null;
+			
+			while(rs.next()) {
+				
+				reimbursement = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getDouble("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						null,
+						null,
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"));
+				
+				if(rs.getInt("reimb_resolver") != 0){
+					reimbursement.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				reimbursement.setAuthor(uDao.getUserById(rs.getInt("reimb_author")));
+			}
+			
+			return reimbursement;
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Could not get reimbursement #" + reimbursement_id);
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	
-	
+	@Override
+	public Reimbursement getUserReimbursementById(int reimbursement_id, int user_id) {
+		
+		UserDao uDao = new UserDao();
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			ResultSet rs = null;
+			
+			String sql = "select * from ers_reimbursement where reimb_id = ? and reimb_author = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, reimbursement_id);
+			ps.setInt(2, user_id);
+			
+			rs = ps.executeQuery();
+			
+			Reimbursement reimbursement = null;
+			
+			while(rs.next()) {
+				
+				reimbursement = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getDouble("reimb_amount"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getTimestamp("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getBytes("reimb_receipt"),
+						null,
+						null,
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"));
+				
+				if(rs.getInt("reimb_resolver") != 0){
+					reimbursement.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));
+				}
+				reimbursement.setAuthor(uDao.getUserById(rs.getInt("reimb_author")));
+			}
+			
+			return reimbursement;
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Could not get reimbursement #" + reimbursement_id);
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 
 }

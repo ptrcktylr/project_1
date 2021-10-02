@@ -9,6 +9,11 @@ public interface ReimbursementDaoInterface {
 	// get all reimbursements
 	public List<Reimbursement> getAllReimbursements();
 	
+	// get reimbursement by id
+	public Reimbursement getReimbursementById(int reimbursement_id);
+	
+	public Reimbursement getUserReimbursementById(int reimbursement_id, int user_id);
+	
 	// add new reimbursement, return its id when created
 	public void addReimbursement(Reimbursement reimbursement, int user_id);
 	

@@ -1,13 +1,9 @@
-const url = "http://localhost:8090/"
+const url = "http://localhost:8090/";
 
 const loginButton = document.getElementById("loginButton");
 loginButton.addEventListener("click", loginFunc);
 
 const sessionInfo = document.getElementById("sessionInfo");
-
-let cookies = document.cookie;
-document.getElementById("user_info").innerHTML = cookies;
-
 
 async function loginFunc() {
     let username = document.getElementById("username").value;
@@ -18,24 +14,32 @@ async function loginFunc() {
         "password":password
     }
 
-    console.log(user);
-
     let response = await fetch(url + "login", {
         method: "POST",
         body: JSON.stringify(user),
-        credentials: "include" // required to ensure cookie is captured
-        // future fetches will also require this "include" value to send the cookie back
+        credentials: "include"
     });
 
-    // control flow based on success or failed login
-    console.log(response.status);
-
     if (response.status === 200) {
+        let data = await response.json();
+
+        // Set cookies
         document.getElementById("login-form").innerText = "Welcome!";
-        document.cookie = `username=${user.username}; SameSite=None; Secure`
-        window.location = "../html/index.html"
+        document.cookie = `user_id=${data.id}; SameSite=None; max-age=600; Secure`;
+        document.cookie = `username=${data.username}; SameSite=None; max-age=600; Secure`;
+        document.cookie = `user_role_id=${data.role_id}; SameSite=None; max-age=600; Secure`;
+        document.cookie = `user_first_name=${data.first_name}; SameSite=None; max-age=600; Secure`;
+        document.cookie = `user_last_name=${data.last_name}; SameSite=None; max-age=600; Secure`;
+        window.location = "../html/index.html";
     } else {
+
+        // Clear cookies
         document.getElementById("login-form").innerText = "Login failed!";
+        document.cookie = `user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
+        document.cookie = `user_role_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
+        document.cookie = `user_first_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
+        document.cookie = `user_last_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
     }
 
 }

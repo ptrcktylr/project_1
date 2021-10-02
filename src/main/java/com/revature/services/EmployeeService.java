@@ -20,5 +20,10 @@ public class EmployeeService {
 	public void addReim(Reimbursement reimbursement, int user_id) {
 		rD.addReimbursement(reimbursement, user_id);
 	}
+	
+	public Reimbursement getReim(int reimbursement_id, int user_id) {
+		ReimbursementDao rD = new ReimbursementDao();
+		return rD.getUserReimbursementById(reimbursement_id, user_id);
+	}
 
 }

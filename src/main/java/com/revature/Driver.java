@@ -39,7 +39,12 @@ public class Driver {
 		
 		app.post(("/login"), lc.loginHandler);
 		app.post(("/logout"), lc.logoutHandler);
-
+		
+		// Single Ticket
+		app.get("/ticket/:r_id", mc.viewReimbHandler);
+		app.get("/viewTicket/:r_id", ec.viewReimbHandler);
+		
+		// Employee Controller
 		app.post("/createTicket", ec.addReimbursementHandler);
 		app.get("/myTickets", ec.viewEmployeeReimHandler);
 		app.get("/myPending", ec.viewPendingEmployeeReimHandler);

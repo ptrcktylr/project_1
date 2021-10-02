@@ -15,11 +15,6 @@ public class LoginController {
 	public static HttpSession sessionUser = null;
 
 	public Handler loginHandler = (ctx) -> {
-		
-		if (ctx.req.getSession(false) != null) {
-			ctx.result("You are already logged in!");
-			return;
-		}
 
 		LoginService ls = new LoginService();
 		String body = ctx.body();
@@ -49,12 +44,13 @@ public class LoginController {
 			sessionUser = ctx.req.getSession();
 			sessionUser.setAttribute("user", user);
 
-			//successful status code
-			ctx.status(200);
-
 			String JSONUser = gson.toJson(user);
 			ctx.result(JSONUser);
 			
+			// successful status code
+			ctx.status(200);
+			
+			// TODO: log this instead
 			System.out.println(sessionUser.getAttribute("user"));
 
 		} else {

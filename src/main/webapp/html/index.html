@@ -23,33 +23,35 @@
               <a class="nav-link active" aria-current="page" href="../html/index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Log Out</a>
+              <a class="nav-link" id="login_button" href="#">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="logout_button" href="#">Log Out</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- Narbar End -->
+    
+    <div class="mx-auto pt-5"></div>
+    <div class="mx-auto pt-5"></div>
 
     <!-- Main Buttons Start -->
     <!-- Employee Buttons -->
     <div class="container-fluid">
-      <div class="mx-auto pt-5"></div>
-      <div class="mx-auto pt-5"></div>
       <div class="d-grid gap-4 col-3 mx-auto mt-5">
-        <button id="newReimbursement" class="btn btn-dark btn-lg">Submit New Reimbursement</button>
-        <button id="myPendingReimbursements" class="btn btn-dark btn-lg">See Pending Reimbursements</button>
-        <button id="myReimbursements" class="btn btn-dark btn-lg">See Reimbursement History</button>
+        <button id="newReimbursement" class="btn btn-dark btn-lg" hidden>Submit New Reimbursement</button>
+        <button id="myPendingReimbursements" class="btn btn-dark btn-lg" hidden>See Pending Reimbursements</button>
+        <button id="myReimbursements" class="btn btn-dark btn-lg" hidden>See Reimbursement History</button>
       </div>
     </div>
 
     <!-- Manager Buttons -->
     <div class="container-fluid">
-      <div class="mx-auto pt-5"></div>
-      <div class="mx-auto pt-5"></div>
       <div class="d-grid gap-4 col-3 mx-auto mt-5">
-        <button id="allPendingReimbursements" class="btn btn-dark btn-lg">View Reimbursement Requests</button>
-        <button id="allReimbursements" class="btn btn-dark btn-lg">View Reimbursement History</button>
+        <button id="allPendingReimbursements" class="btn btn-dark btn-lg" hidden>View Reimbursement Requests</button>
+        <button id="allReimbursements" class="btn btn-dark btn-lg" hidden>View Reimbursement History</button>
       </div>
     </div>
     <!-- Main Buttons End -->

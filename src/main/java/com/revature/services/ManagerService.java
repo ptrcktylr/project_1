@@ -29,5 +29,10 @@ public class ManagerService {
 		ReimbursementDao rD = new ReimbursementDao();
 		rD.denyReimbursement(reimbursement_id, resolver);
 	}
+	
+	public Reimbursement getReim(int reimbursement_id) {
+		ReimbursementDao rD = new ReimbursementDao();
+		return rD.getReimbursementById(reimbursement_id);
+	}
 
 }

@@ -82,7 +82,7 @@ function createLinks() {
             });
             ticket_ele.style.cursor = "pointer";
         }
-    }, 3000)
+    }, 4000)
 }
 
 createLinks();

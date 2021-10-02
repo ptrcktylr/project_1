@@ -15,7 +15,7 @@ public class ConnectionUtil {
 		}
 		
 		// hardcoded DB info
-		String url = "jdbc:postgresql://localhost:5432/ers?currentSchema=er_system";
+		String url = "jdbc:postgresql://35.232.66.183:5432/postgres?currentSchema=er_system";
 		String username = "postgres";
 		String password = "password";
 		

@@ -1,6 +1,5 @@
 const url = "http://localhost:8090/";
 
-console.log(document.cookie);
 if (document.cookie) {
     var user_role_id = document.cookie.split('; ').find(row => row.startsWith('user_role_id=')).split('=')[1];
 }

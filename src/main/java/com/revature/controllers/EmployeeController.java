@@ -124,6 +124,12 @@ public class EmployeeController {
 				EmployeeService es = new EmployeeService();
 				int reim_id = Integer.parseInt(ctx.pathParam("r_id"));
 				Reimbursement reimb = es.getReim(reim_id, user.getId());
+				
+				if (reimb == null) {
+					ctx.status(403);
+					ctx.result("This is not your ticket!");
+					return;
+				}
 
 				Gson gson = new Gson();
 				

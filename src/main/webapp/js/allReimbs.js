@@ -4,6 +4,11 @@ const url = "http://localhost:8090/";
 const logoutButton = document.getElementById("logout_button");
 logoutButton.addEventListener("click", logout);
 
+// Ticket Table Container
+var ticketsContainer = document.getElementById("ticketsContainer");
+
+// Full Ticket View Container
+var ticket_body = document.getElementById("ticketbody");
 
 async function logout() {
     let response = await fetch(url + "logout", {credentials: "include", method: "POST"});
@@ -128,7 +133,9 @@ async function getReim(reim_id) {
 }
 
 function displayTicket(ticket_data) {
-    var ticket_body = document.getElementById("ticketbody");
+    // clear table
+    ticketsContainer.hidden = true;
+    ticket_body.hidden = false;
 
     let ticket_desc = (ticket_data.description || " ");
     
@@ -142,15 +149,16 @@ function displayTicket(ticket_data) {
                         <div class="card-body">
                             <div class="text-center mb-4">
                                 <h2 class="mb-4">Ticket ${ticket_data.id}</h2>
-                                <div>Amount: ${ticket_data.amount}</div>
-                                <div>Author: ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
-                                <div>Status: ${statuses[ticket_data.status_id]}</div>
-                                <div>Description: ${ticket_desc}</div>
-                                <div>Resolved By: ${ticket_data.resolver.first_name + " " + ticket_data.resolver.last_name}</div>
-                                <div>Submitted At: ${ticket_data.submitted_at}</div>
-                                <div>Resolved At: ${ticket_data.resolved_at}</div>
+                                <div><strong>Amount: </strong>${ticket_data.amount}</div>
+                                <div><strong>Author: </strong> ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
+                                <div><strong>Status: </strong> ${statuses[ticket_data.status_id]}</div>
+                                <div><strong>Description: </strong> ${ticket_desc}</div>
+                                <div><strong>Resolved By: </strong> ${ticket_data.resolver.first_name + " " + ticket_data.resolver.last_name}</div>
+                                <div><strong>Submitted At: </strong> ${ticket_data.submitted_at}</div>
+                                <div><strong>Resolved At: </strong> ${ticket_data.resolved_at}</div>
                             </div>
                         </div>
+                        <button class="btn btn-danger" onclick="back()">Close</button>
                     </div>
                 </div>
             </div>
@@ -166,19 +174,20 @@ function displayTicket(ticket_data) {
                         <div class="card-body">
                             <div class="text-center mb-4">
                                 <h2 class="mb-4">Ticket ${ticket_data.id}</h2>
-                                <div>Amount: ${ticket_data.amount}</div>
-                                <div>Author: ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
-                                <div>Status: ${statuses[ticket_data.status_id]}</div>
-                                <div>Description: ${ticket_desc}</div>
-                                <div>Resolved By: </div>
-                                <div>Submitted At: ${ticket_data.submitted_at}</div>
-                                <div>Resolved At: </div>
+                                <div><strong>Amount: </strong>${ticket_data.amount}</div>
+                                <div><strong>Author: </strong> ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
+                                <div><strong>Status: </strong> ${statuses[ticket_data.status_id]}</div>
+                                <div><strong>Description: </strong> ${ticket_desc}</div>
+                                <div><strong>Resolved By: </strong> </div>
+                                <div><strong>Submitted At: </strong> ${ticket_data.submitted_at}</div>
+                                <div><strong>Resolved At: </strong> </div>
                             </div>
                             <div class="text-center">
-                                <button id="approveTicketButton" class="btn btn-success" onclick="approve(${ticket_data.id})">Approve</button>
+                                <button id="approveTicketButton" class="btn btn-success me-3" onclick="approve(${ticket_data.id})">Approve</button>
                                 <button id="denyTicketButton" class="btn btn-danger" onclick="deny(${ticket_data.id})">Deny</button>
                             </div>
                         </div>
+                        <button class="btn btn-danger" onclick="back()">Close</button>
                     </div>
                 </div>
             </div>
@@ -205,4 +214,9 @@ async function deny(reimb_id) {
     } else {
         console.log("Not Authorized!")
     }
+}
+
+function back() {
+    ticketsContainer.hidden = false;
+    ticket_body.hidden = true;
 }

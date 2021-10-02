@@ -1,0 +1,8 @@
+2021-10-02 12:58:51 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-02 13:02:08 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-02 13:02:28 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-02 13:03:08 INFO  LoginController:59 - USER LOGGIN ACCOUNT FAILED: manager - 2
+2021-10-02 13:04:58 INFO  ManagerController:34 - Approved reimbursement ID: 1 by manager: manager
+2021-10-02 13:07:21 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - 1
+2021-10-02 13:08:29 INFO  EmployeeController:44 - Added new reimbursement by user: employee
+2021-10-02 13:08:47 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - 1

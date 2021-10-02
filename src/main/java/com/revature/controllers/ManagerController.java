@@ -2,6 +2,9 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
@@ -12,6 +15,8 @@ import io.javalin.http.Handler;
 public class ManagerController {
 
 	public Handler approveReimbursementHandler = (ctx) -> {
+		
+		Logger log = LogManager.getLogger(ManagerController.class);
 		
 		if(ctx.req.getSession(false) != null) {
 			
@@ -25,6 +30,8 @@ public class ManagerController {
 		
 				ctx.result("Updated Request");
 				ctx.status(200);
+				
+				log.info("Approved reimbursement ID: " + reim_id + " by manager: " + user.getUsername());
 				
 			} else {
 				ctx.status(403);
@@ -42,6 +49,8 @@ public class ManagerController {
 	};
 
 	public Handler denyReimbursementHandler = (ctx) -> {
+		
+		Logger log = LogManager.getLogger(ManagerController.class);
 
 		if(ctx.req.getSession(false) != null) {
 			
@@ -55,6 +64,8 @@ public class ManagerController {
 		
 				ctx.result("Updated Request");
 				ctx.status(200);
+				
+				log.info("Denied reimbursement ID: " + reim_id + " by manager: " + user.getUsername());
 				
 			} else {
 				ctx.status(403);

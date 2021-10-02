@@ -2,6 +2,9 @@ package com.revature.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.revature.models.LoginDTO;
 import com.revature.models.User;
@@ -18,6 +21,7 @@ public class LoginController {
 
 		LoginService ls = new LoginService();
 		String body = ctx.body();
+		Logger log = LogManager.getLogger(LoginController.class);
 
 		Gson gson = new Gson();
 
@@ -52,17 +56,22 @@ public class LoginController {
 			
 			// TODO: log this instead
 			System.out.println(sessionUser.getAttribute("user"));
+			log.info("USER LOGGIN ACCOUNT SUCCESS: " + user.getUsername() + " - Role id: " + user.getRole_id());
 
 		} else {
 			ctx.status(401); //unauthorized status code
 			ctx.result("Login Failed");
+			log.error("USER LOGGIN ACCOUNT FAILED");
 		}
 
 
 
 	};
 	public Handler logoutHandler = (ctx) -> {
+		Logger log = LogManager.getLogger(LoginController.class);
 		if(ctx.req.getSession(false) != null) {
+			User user = (User) LoginController.sessionUser.getAttribute("user");
+			log.info("USER LOGGIN ACCOUNT SUCCESS: " + user.getUsername() + " - Role id: " + user.getRole_id());
 			sessionUser.invalidate();
 			ctx.result("Logged Out");
 		} else {

@@ -2,6 +2,9 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
@@ -12,6 +15,8 @@ import io.javalin.http.Handler;
 public class EmployeeController {
 
 	public Handler addReimbursementHandler = (ctx) -> {
+		
+		Logger log = LogManager.getLogger(EmployeeController.class);
 
 		if(ctx.req.getSession(false) != null) {
 			
@@ -36,6 +41,8 @@ public class EmployeeController {
 					reimbursement.setStatus_id(1);
 					
 					es.addReim(reimbursement, user.getId());
+					log.info("Added new reimbursement by user: " + user.getUsername());
+ 
 					
 				}
 				

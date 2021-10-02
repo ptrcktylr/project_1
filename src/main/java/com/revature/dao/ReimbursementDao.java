@@ -199,7 +199,6 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 						rs.getInt("reimb_status_id"),
 						rs.getInt("reimb_type_id"));
 
-				System.out.println(rs.getInt("reimb_resolver"));
 
 				if(rs.getInt("reimb_resolver") != 0){
 					reimburst.setResolver(uDao.getUserById(rs.getInt("reimb_resolver")));

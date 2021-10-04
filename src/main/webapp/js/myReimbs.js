@@ -58,7 +58,7 @@ async function getMyReims() {
             tableBody.innerHTML += `
             <tr id="ticket-${ticket.id}">
             <td>${ticket.id}</td>
-            <td>${ticket.amount}</td>
+            <td>${ticket.amount.toFixed(2)}</td>
             <td>${types[ticket.type_id]}</td>
             <td>${statuses[ticket.status_id]}</td>
             <td>${ticket.submitted_at}</td>
@@ -124,7 +124,7 @@ function displayTicket(ticket_data) {
                         <div class="card-body">
                             <div class="text-center mb-4">
                                 <h2 class="mb-4">Ticket ${ticket_data.id}</h2>
-                                <div><strong>Amount: </strong>${ticket_data.amount}</div>
+                                <div><strong>Amount: </strong>${ticket_data.amount.toFixed(2)}</div>
                                 <div><strong>Author: </strong> ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
                                 <div><strong>Status: </strong> ${statuses[ticket_data.status_id]}</div>
                                 <div><strong>Description: </strong> ${ticket_desc}</div>
@@ -150,7 +150,7 @@ function displayTicket(ticket_data) {
                         <div class="card-body">
                             <div class="text-center mb-4">
                                 <h2 class="mb-4">Ticket ${ticket_data.id}</h2>
-                                <div><strong>Amount: </strong>${ticket_data.amount}</div>
+                                <div><strong>Amount: </strong>${ticket_data.amount.toFixed(2)}</div>
                                 <div><strong>Author: </strong> ${ticket_data.author.first_name + " " + ticket_data.author.last_name}</div>
                                 <div><strong>Status: </strong> ${statuses[ticket_data.status_id]}</div>
                                 <div><strong>Description: </strong> ${ticket_desc}</div>

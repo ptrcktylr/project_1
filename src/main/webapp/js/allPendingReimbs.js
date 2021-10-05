@@ -76,6 +76,8 @@ async function getMyReims() {
             `;
         }
 
+        createLinks();
+
     } else {
         console.log("Not Authorized!")
     }
@@ -84,18 +86,15 @@ async function getMyReims() {
 getMyReims();
 
 function createLinks() {
-    setTimeout(function () {
-        allTickets = document.querySelectorAll("[id^='ticket-']");
-        for (let ticket_ele of allTickets) {
-            ticket_ele.addEventListener("click", function () {
-                getReim(ticket_ele.id.substring(7));
-            });
-            ticket_ele.style.cursor = "pointer";
-        }
-    }, 4000)
+    allTickets = document.querySelectorAll("[id^='ticket-']");
+    for (let ticket_ele of allTickets) {
+        ticket_ele.addEventListener("click", function () {
+            getReim(ticket_ele.id.substring(7));
+        });
+        ticket_ele.style.cursor = "pointer";
+    }
 }
 
-createLinks();
 
 async function getReim(reim_id) {
     let response = await fetch(url + `ticket/${reim_id}`, {credentials: "include"});

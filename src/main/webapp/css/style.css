@@ -1,0 +1,10 @@
+.main {
+    width: 40%;
+    height: 250px;
+    border-radius: 20px;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    border: black solid 0.1px;
+    padding: 5px;
+    margin: 25vh auto;
+    display: flex;
+}

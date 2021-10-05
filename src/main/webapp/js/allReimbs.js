@@ -1,5 +1,19 @@
 const url = "http://localhost:8090/";
 
+// Global arrays for filtering
+var allReimbs = []; // stores all the reimbs when request successfully finishes
+var filteredReimbs = []; // stores filtered results, resets every filter
+
+// Filter Button
+const filterButton = document.getElementById("filterButton");
+filterButton.addEventListener("click", filter);
+
+// Filter Inputs
+const typeFilter = document.getElementById("type_filter");
+const statusFilter = document.getElementById("status_filter");
+const authorFilter = document.getElementById("author_filter");
+const resolverFilter = document.getElementById("resolver_filter");
+
 // Logout Button
 const logoutButton = document.getElementById("logout_button");
 logoutButton.addEventListener("click", logout);
@@ -66,6 +80,10 @@ async function getMyReims() {
 
         for (let ticket of data) {
 
+            // add to allReimbs array for filtering
+            allReimbs.push(ticket);
+
+            // create table data from response
             if (ticket.status_id != 1) {
                 tableBody.innerHTML += `
                 <tr id="ticket-${ticket.id}">
@@ -140,7 +158,7 @@ function displayTicket(ticket_data) {
     let ticket_desc = (ticket_data.description || " ");
     var ticket_img = null;
     if (ticket_data.receipt) {
-        ticket_img = `src="data:image/png;base64,` + bytesToBase64(ticket_data.receipt) + `"`;
+        ticket_img = `style="width: 100%;" src="data:image/png;base64,` + bytesToBase64(ticket_data.receipt) + `"`;
     }
     
     if (ticket_data.status_id != 1) {
@@ -205,7 +223,7 @@ function displayTicket(ticket_data) {
 async function approve(reimb_id) {
     let response = await fetch(url + "approveTicket/" + reimb_id, {method:"PATCH", credentials: "include"});
     if (response.status === 200) {
-        console.log("ticket " + reimb_id + " approved");
+        // console.log("ticket " + reimb_id + " approved");
         location.reload();
     } else {
         console.log("Not Authorized!")
@@ -215,7 +233,7 @@ async function approve(reimb_id) {
 async function deny(reimb_id) {
     let response = await fetch(url + "denyTicket/" + reimb_id, {method:"PATCH", credentials: "include"});
     if (response.status === 200) {
-        console.log("ticket " + reimb_id + " denied");
+        // console.log("ticket " + reimb_id + " denied");
         location.reload();
     } else {
         console.log("Not Authorized!")
@@ -234,4 +252,98 @@ function bytesToBase64(byteA) {
         base64 += String.fromCharCode(bytes[i]);
     }
     return btoa(base64);
+}
+
+// filters data and stores in a global array filteredReimbs 
+function filterData() {
+    // array to store filtered results
+    filteredReimbs = []; 
+
+    // get inputs from fields
+    let type = typeFilter.value;
+    let status = statusFilter.value;
+    let submitter_name = authorFilter.value;
+    let resolver_name = resolverFilter.value;
+
+    for (let i = 0; i < allReimbs.length; i++) {
+        let match = true;
+        // filter by type if given
+        if (type) {
+            if (allReimbs[i].type_id != type) {
+                match = false;
+            }
+        }
+        // filter by status if given
+        if (status) {
+            if (allReimbs[i].status_id != status) {
+                match = false;
+            }
+        }
+        // filter by submitter name if given
+        if (submitter_name != "") {
+            let full_name = (allReimbs[i].author.first_name + " " + allReimbs[i].author.last_name).toLowerCase();
+            if (!full_name.includes(submitter_name.toLowerCase())) {
+                match = false;
+            }
+        }
+        // filter by resolver name if given
+        if (resolver_name != "") {
+            if (allReimbs[i].resolver != undefined) { // if given resolver name AND ticket doesn't have one, don't include in the filtered results
+                let full_name = (allReimbs[i].resolver.first_name + " " + allReimbs[i].resolver.last_name).toLowerCase();
+                if (!full_name.includes(resolver_name.toLowerCase())) {
+                    match = false;
+                }
+            } else {
+                match = false;
+            }
+        }
+
+        // if match, add to filteredReimbs
+        if (match) {
+            filteredReimbs.push(allReimbs[i]);
+        }
+    }
+}
+
+// takes user input and filters data based on input, updates html to display results
+function filter() {
+    // filter data
+    filterData();
+
+    // reset table html
+    tableBody.innerHTML = "";
+
+    // populate table html
+    for (ticket of filteredReimbs) {
+        if (ticket.status_id != 1) {
+            tableBody.innerHTML += `
+            <tr id="ticket-${ticket.id}">
+            <td>${ticket.id}</td>
+            <td>${ticket.amount.toFixed(2)}</td>
+            <td>${types[ticket.type_id]}</td>
+            <td>${statuses[ticket.status_id]}</td>
+            <td>${ticket.author.first_name + " " + ticket.author.last_name}</td>
+            <td>${ticket.resolver.first_name + " " + ticket.resolver.last_name}</td>
+            <td>${ticket.submitted_at}</td>
+            <td>${ticket.resolved_at}</td>
+            </tr>
+        `;
+        } else {
+            tableBody.innerHTML += `
+            <tr id="ticket-${ticket.id}">
+            <td>${ticket.id}</td>
+            <td>${ticket.amount.toFixed(2)}</td>
+            <td>${types[ticket.type_id]}</td>
+            <td>${statuses[ticket.status_id]}</td>
+            <td>${ticket.author.first_name + " " + ticket.author.last_name}</td>
+            <td></td>
+            <td>${ticket.submitted_at}</td>
+            <td></td>
+            </tr>
+            `;
+        }
+    }
+
+    // create new links for detailed view
+    createLinks();
 }

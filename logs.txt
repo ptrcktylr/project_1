@@ -29,3 +29,16 @@
 2021-10-05 01:12:45 INFO  EmployeeController:44 - Added new reimbursement by user: employee
 2021-10-05 16:32:06 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
 2021-10-05 16:32:17 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 16:35:47 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-05 16:37:41 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-05 17:03:30 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 17:59:43 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-05 17:59:50 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-05 17:59:56 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 18:20:57 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 18:21:02 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 19:31:16 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 19:31:27 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 19:42:18 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 19:45:42 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-05 19:46:39 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2

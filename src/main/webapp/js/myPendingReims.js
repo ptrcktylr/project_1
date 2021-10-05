@@ -65,6 +65,7 @@ async function getMyPendingReims() {
             </tr>
             `;
         }
+        createLinks();
 
     } else {
         console.log("Not Authorized!")
@@ -84,8 +85,6 @@ function createLinks() {
         }
     }, 4000)
 }
-
-createLinks();
 
 async function getReim(reim_id) {
     let response = await fetch(url + `viewTicket/${reim_id}`, {credentials: "include"});

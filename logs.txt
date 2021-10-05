@@ -6,3 +6,17 @@
 2021-10-02 13:07:21 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - 1
 2021-10-02 13:08:29 INFO  EmployeeController:44 - Added new reimbursement by user: employee
 2021-10-02 13:08:47 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - 1
+2021-10-02 13:15:19 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-02 13:19:14 INFO  EmployeeController:44 - Added new reimbursement by user: employee
+2021-10-02 13:19:44 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-02 13:19:54 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-02 13:20:22 INFO  ManagerController:68 - Denied reimbursement ID: 5 by manager: manager
+2021-10-04 20:43:33 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-04 20:46:33 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-04 20:47:05 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-04 20:48:08 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-04 21:21:13 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-04 21:21:20 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-04 21:35:17 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-04 21:35:33 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-04 21:37:18 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2

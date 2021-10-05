@@ -42,7 +42,7 @@ public class EmployeeController {
 					
 					es.addReim(reimbursement, user.getId());
 					log.info("Added new reimbursement by user: " + user.getUsername());
- 
+					ctx.status(200);
 					
 				}
 				

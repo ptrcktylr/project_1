@@ -24,9 +24,6 @@
               <a class="nav-link active" aria-current="page" href="../html/index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="login_button" href="#">Log In</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" id="logout_button" href="#">Log Out</a>
             </li>
           </ul>
@@ -43,6 +40,30 @@
     <div id="ticketsContainer" class="container mt-5">
       <h2 class="text-center mb-5">All Reimbursements</h2>
         <div class="row">
+          <!-- Filter Container Start -->
+          <div id="filterInputContainer">
+            <div class="input-group mb-3">
+              <!-- type filter -->
+              <select class="form-select" name="type_filter" id="type_filter">
+                <option selected value="">Type</option>
+                <option value="1">Lodging</option>
+                <option value="2">Travel</option>
+                <option value="3">Food</option>
+                <option value="4">Other</option>
+              </select>
+              <!-- status filter -->
+              <select class="form-select" name="status_filter" id="status_filter">
+                <option selected value="">Status</option>
+                <option value="1">Pending</option>
+                <option value="2">Approved</option>
+                <option value="3">Denied</option>
+              </select>
+              <!-- resolver name -->
+              <input type="text" class="form-control" placeholder="Resolved By" name="resolver_filter" id="resolver_filter">
+              <button id="filterButton" class="btn btn-dark btn">Filter</button>
+            </div>
+          </div>
+          <!-- Filter Container End -->
             <div class="col-lg">
                 <div class="card shadow">
                     <div class="card-body">
@@ -54,6 +75,7 @@
                                 <th scope="col">Type</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Submitted At</th>
+                                <th scope="col">Resolved By</th>
                                 <th scope="col">Resolved At</th>
                               </tr>
                             </thead>

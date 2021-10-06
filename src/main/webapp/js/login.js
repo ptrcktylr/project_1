@@ -34,7 +34,12 @@ async function loginFunc() {
     } else {
 
         // Clear cookies
-        document.getElementById("login-form").innerText = "Login failed!";
+        document.getElementById("login-form").innerHTML = `
+        <div class="d-flex flex-column align-items-center justify-content-center" style="height: 100%;">
+            <h4>Login Failed!</h4>
+            <button class="btn btn-dark mt-3" onclick="location.reload()">Back</button>
+        </div>
+        `;
         document.cookie = `user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
         document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;
         document.cookie = `user_role_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT;SameSite=None;`;

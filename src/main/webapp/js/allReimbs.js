@@ -41,10 +41,10 @@ async function logout() {
 }
 
 // Login Button
-const loginButton = document.getElementById("login_button");
-loginButton.addEventListener("click", function () {
-    window.location = "../html/login.html";
-});
+// const loginButton = document.getElementById("login_button");
+// loginButton.addEventListener("click", function () {
+//     window.location = "../html/login.html";
+// });
 
 const tableBody = document.getElementById("reimb-table-body");
 

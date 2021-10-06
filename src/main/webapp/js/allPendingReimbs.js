@@ -27,10 +27,10 @@ async function logout() {
 }
 
 // Login Button
-const loginButton = document.getElementById("login_button");
-loginButton.addEventListener("click", function () {
-    window.location = "../html/login.html";
-});
+// const loginButton = document.getElementById("login_button");
+// loginButton.addEventListener("click", function () {
+//     window.location = "../html/login.html";
+// });
 
 const tableBody = document.getElementById("reimb-table-body");
 
@@ -118,7 +118,7 @@ function displayTicket(ticket_data) {
     let ticket_desc = (ticket_data.description || " ");
     var ticket_img = null;
     if (ticket_data.receipt) {
-        ticket_img = `src="data:image/png;base64,` + bytesToBase64(ticket_data.receipt) + `"`;
+        ticket_img = `style="width: 100%;" src="data:image/png;base64,` + bytesToBase64(ticket_data.receipt) + `"`;
     }
 
     ticket_body.innerHTML = `

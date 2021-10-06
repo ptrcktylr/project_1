@@ -1,5 +1,8 @@
 const url = "http://localhost:8090/";
 
+// Loading icon
+var loadingIcon = document.getElementById("loadingIcon");
+
 // Global arrays for filtering
 var allReimbs = []; // stores all the reimbs when request successfully finishes
 var filteredReimbs = []; // stores filtered results, resets every filter
@@ -96,6 +99,7 @@ async function getMyReims() {
     } else {
         console.log("Not Authorized!")
     }
+    loadingIcon.hidden = true;
 }
 
 getMyReims();

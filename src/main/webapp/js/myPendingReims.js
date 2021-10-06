@@ -1,5 +1,8 @@
 const url = "http://localhost:8090/";
 
+// Loading icon
+var loadingIcon = document.getElementById("loadingIcon");
+
 // Logout Button
 const logoutButton = document.getElementById("logout_button");
 logoutButton.addEventListener("click", logout);
@@ -70,6 +73,7 @@ async function getMyPendingReims() {
     } else {
         console.log("Not Authorized!")
     }
+    loadingIcon.hidden = true;
 }
 
 getMyPendingReims();

@@ -94,3 +94,8 @@
 2021-10-06 09:42:27 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
 2021-10-06 09:50:47 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
 2021-10-06 09:51:40 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 09:56:13 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 10:12:57 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 10:13:02 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 10:15:55 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 10:15:59 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1

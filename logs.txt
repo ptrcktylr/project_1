@@ -89,3 +89,8 @@
 2021-10-05 20:49:55 INFO  ManagerController:68 - Denied reimbursement ID: 11 by manager: manager
 2021-10-05 20:50:30 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
 2021-10-05 20:50:33 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-06 09:08:12 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 09:23:34 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
+2021-10-06 09:42:27 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 09:50:47 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
+2021-10-06 09:51:40 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2

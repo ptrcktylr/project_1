@@ -15,7 +15,7 @@ public interface ReimbursementDaoInterface {
 	public Reimbursement getUserReimbursementById(int reimbursement_id, int user_id);
 	
 	// add new reimbursement, return its id when created
-	public void addReimbursement(Reimbursement reimbursement, int user_id);
+	public boolean addReimbursement(Reimbursement reimbursement, int user_id);
 	
 	// remove a reimbursement (with its id)
 	public void removeReimbursement(int reimbursement_id);

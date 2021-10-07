@@ -59,7 +59,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 	}
 
 	@Override
-	public void addReimbursement(Reimbursement reimbursement, int user_id) {
+	public boolean addReimbursement(Reimbursement reimbursement, int user_id) {
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			
@@ -84,12 +84,13 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 			ps.executeUpdate();
 			
 			System.out.println("Successfully added new reimbursement");
-			
+			return true;
 			
 			
 		} catch (SQLException e) {
 			System.out.println("Failed to create new reimbursement");
 			e.printStackTrace();
+			return false;
 		}
 	}
 

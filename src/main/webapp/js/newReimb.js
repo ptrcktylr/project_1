@@ -26,8 +26,6 @@ async function submitTicket() {
     var amount_value = amount.value;
     var description_value = description.value;
     var type_value = type.value;
-    
-    console.log(receipt_value);
 
     let newTicket = {
         "amount":parseFloat(amount_value),
@@ -39,8 +37,6 @@ async function submitTicket() {
     if (receipt_value) {
         newTicket["receipt"] = Array.from(receipt_value);
     }
-
-    console.log(newTicket);
 
     let response = await fetch(url + "createTicket", {
         method: "POST",

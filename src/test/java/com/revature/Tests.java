@@ -93,7 +93,21 @@ public class Tests {
 	}
 	
 	// all pending tickets returns only pending tickets 
+	@Test
+	void getAllPendingReimbs() {
+		
+	}
+	
 	// deny reimb
+	@Test
+	void denyReimb() {
+		
+	}
+	
 	// approve reimb
+	@Test
+	void approveReimb() {
+		
+	}
 
 }

@@ -83,7 +83,7 @@ public class Tests {
 	void getMissingReimb() {
 		ManagerService ms = new ManagerService();
 		
-		Reimbursement reimb = ms.getReim(999999999);
+		Reimbursement reimb = ms.getReim(0);
 		assertNull(reimb);
 	}
 	

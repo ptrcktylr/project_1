@@ -106,3 +106,7 @@
 2021-10-06 12:35:31 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: employee - Role id: 1
 2021-10-06 12:35:36 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager - Role id: 2
 2021-10-07 09:13:50 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-07 16:19:19 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 16:21:17 INFO  EmployeeController:44 - Added new reimbursement by user: patrick
+2021-10-07 16:21:31 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 16:22:32 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: paulchang123 - Role id: 1

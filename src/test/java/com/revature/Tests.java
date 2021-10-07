@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import com.revature.models.Reimbursement;
@@ -90,24 +93,87 @@ public class Tests {
 	// all tickets returns all tickets
 	@Test
 	void getAllReimbs() {
+		ManagerService ms = new ManagerService();
+		List<Reimbursement> reimbs = ms.viewAllReim();
+		assertTrue(reimbs.size() != 0);
 	}
 	
 	// all pending tickets returns only pending tickets 
 	@Test
 	void getAllPendingReimbs() {
+		ManagerService ms = new ManagerService();
 		
+		// get all pending
+		List<Reimbursement> reimbs = ms.getPendingReim();
+		
+		// if any are not pending, fail
+		boolean allReimbsPending = true;
+		for (Reimbursement reimb : reimbs) {
+			if (reimb.getStatus_id() != 1) {
+				allReimbsPending = false;
+			}
+		}
+		assertTrue(allReimbsPending);
 	}
 	
 	// deny reimb
 	@Test
 	void denyReimb() {
+		LoginService ls = new LoginService();
+		EmployeeService es = new EmployeeService();
+		ManagerService ms = new ManagerService();
 		
+		// create user for author
+		User author = ls.userLogin("patrick", "password");
+		// create user for resolver
+		User resolver = ls.userLogin("manager_funsocks", "password");
+		
+		// create reimb
+		Reimbursement testReimb = new Reimbursement(
+				10.99, "This is a test reimbursement", author, 1);
+		
+		// add reimb to database
+		es.addReim(testReimb, author.getId());
+		
+		// get all pending
+		List<Reimbursement> reimbs = ms.getPendingReim();
+		
+		// get last added, set it to deny
+		int reimb_id = reimbs.get(reimbs.size()-1).getId();
+		ms.denyReim(reimb_id, resolver.getId());
+		
+		// return true if reimb is denied
+		assertEquals(3, ms.getReim(reimb_id).getStatus_id());
 	}
 	
 	// approve reimb
 	@Test
 	void approveReimb() {
+		LoginService ls = new LoginService();
+		EmployeeService es = new EmployeeService();
+		ManagerService ms = new ManagerService();
 		
+		// create user for author
+		User author = ls.userLogin("patrick", "password");
+		// create user for resolver
+		User resolver = ls.userLogin("manager_funsocks", "password");
+		
+		// create reimb
+		Reimbursement testReimb = new Reimbursement(
+				10.99, "This is a test reimbursement", author, 1);
+		
+		// add reimb to database
+		es.addReim(testReimb, author.getId());
+		
+		// get all pending
+		List<Reimbursement> reimbs = ms.getPendingReim();
+		
+		// get last added, set it to approve
+		int reimb_id = reimbs.get(reimbs.size()-1).getId();
+		ms.approveReim(reimb_id, resolver.getId());
+		
+		// return true if reimb is approved
+		assertEquals(2, ms.getReim(reimb_id).getStatus_id());
 	}
 
 }

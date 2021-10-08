@@ -77,8 +77,8 @@ public class Tests {
 	void getValidReimb() {
 		ManagerService ms = new ManagerService();
 		
-		Reimbursement reimb = ms.getReim(3);
-		assertEquals(3, reimb.getId());
+		Reimbursement reimb = ms.getReim(2);
+		assertEquals(2, reimb.getId());
 	}
 	
 	// searching by reimb id returns null if that id doesn't exist

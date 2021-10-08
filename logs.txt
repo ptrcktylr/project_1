@@ -164,3 +164,10 @@
 2021-10-08 08:38:12 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager_funsocks - Role id: 2
 2021-10-08 08:38:33 INFO  ManagerController:34 - Approved reimbursement ID: 57 by manager: manager_funsocks
 2021-10-08 08:40:26 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager_funsocks - Role id: 2
+2021-10-08 08:49:00 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-08 08:49:10 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-08 08:49:54 INFO  EmployeeController:44 - Added new reimbursement by user: patrick
+2021-10-08 08:50:22 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-08 08:50:33 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: manager_funsocks - Role id: 2
+2021-10-08 08:50:52 INFO  ManagerController:34 - Approved reimbursement ID: 58 by manager: manager_funsocks
+2021-10-08 08:51:46 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: manager_funsocks - Role id: 2

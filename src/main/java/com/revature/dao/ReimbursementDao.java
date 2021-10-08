@@ -89,7 +89,7 @@ public class ReimbursementDao implements ReimbursementDaoInterface {
 			
 		} catch (SQLException e) {
 			System.out.println("Failed to create new reimbursement");
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 	}

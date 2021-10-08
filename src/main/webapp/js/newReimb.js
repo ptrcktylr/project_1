@@ -47,14 +47,14 @@ async function submitTicket() {
     if (response.status === 200) {
         result.innerHTML = `
         <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-            Ticket successfully submitted!
+            Reimbursement successfully submitted!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
         resetForm();
     } else {
         result.innerHTML = `
         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-            Ticket failed to submit! Invalid inputs!
+            Reimbursement failed to submit! Invalid inputs!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
         resetForm();

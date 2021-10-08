@@ -110,3 +110,17 @@
 2021-10-07 16:21:17 INFO  EmployeeController:44 - Added new reimbursement by user: patrick
 2021-10-07 16:21:31 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
 2021-10-07 16:22:32 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: paulchang123 - Role id: 1
+2021-10-07 17:35:08 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-07 17:35:40 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:39:47 INFO  EmployeeController:44 - Added new reimbursement by user: patrick
+2021-10-07 17:46:14 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:46:21 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-07 17:46:30 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:48:20 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:55:15 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-07 17:55:22 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:55:35 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:57:10 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 17:59:29 ERROR LoginController:64 - USER LOGGIN ACCOUNT FAILED
+2021-10-07 17:59:44 INFO  LoginController:59 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1
+2021-10-07 18:01:03 INFO  LoginController:74 - USER LOGGIN ACCOUNT SUCCESS: patrick - Role id: 1

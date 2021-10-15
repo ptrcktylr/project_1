@@ -1,5 +1,3 @@
-# project_1
-
 # Employee Reimbursment System (ERS)
 
 ## Executive Summary
